@@ -1,0 +1,50 @@
+<project>
+    <property name = "testdir" location = "tests" />
+    <property name = "srcdir" location = "src" />
+    <property name = "builddir" location = "build" />
+    <property name = "jarname" value = "BeanManager" />
+    <property name = "reportdir" location="reports" />
+
+    <target name="compile">
+        <mkdir dir="${builddir}/classes"/>
+        <javac srcdir="${srcdir}" destdir="${builddir}/classes"/>
+        <mkdir dir="${builddir}/tests" />
+        <javac srcdir="${testdir}" destdir="${builddir}/tests" />
+    </target>
+
+    <target name="build" depends="compile">
+        <mkdir dir="${builddir}/artifacts"/>
+        <jar destfile="${builddir}/artifacts/${jarname}.jar" basedir="${builddir}/classes">
+            <manifest>
+                <attribute name="Main-Class" value="root.Main"/>
+            </manifest>
+        </jar>
+    </target>
+
+    <target name="clean">
+        <delete dir="${builddir}"/>
+    </target>
+
+    <target name="test" depends="build">
+    </target>
+
+    <target name="native2ascii">
+        <mkdir dir="${testdir}/root/beans/locals/ascii/russian" />
+        <native2ascii encoding="utf8" src="${testdir}/root/beans/locals/native/russian"
+                      dest="${testdir}/root/beans/locals/ascii/russian" includes="**/*.properties" ext=".properties"/>
+    </target>
+
+    <target name="xml" >
+        <xmlvalidate failonerror="no" lenient="yes" warn="yes">
+            <fileset dir="${reportdir}" includes="*.xml"/>
+        </xmlvalidate>
+    </target>
+
+    <target name="report" depends="test" >
+
+    </target>
+    <target name="run">
+        <java jar="build/jar/HelloWorld.jar" fork="true"/>
+    </target>
+
+</project>
