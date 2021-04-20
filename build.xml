@@ -22,8 +22,8 @@
         <jar destfile="${builddir}/artifacts/${jarname}.jar" basedir="${builddir}/classes">
             <manifest>
                 <attribute name="Created-By" value="${author}"/>
-                <attribute name="Name" value="${jar.name}"/>
                 <attribute name="Main-Class" value="${main.class.dir}"/>
+                <section name="src/root/beans/"/>
                 <attribute name="Specification-Title" value="${specification.title}"/>
                 <attribute name="Specification-Version" value="${specification.version}"/>
                 <attribute name="Specification-Vendor" value="${specification.vendor}"/>
@@ -40,8 +40,8 @@
 
     <target name="test" depends="build">
         <junit>
-            <classpath location="lib/junit-4.13.2.jar" />
-            <classpath location="lib/hamcrest-core-1.3.jar" />
+            <classpath location="${librarydir}/junit-4.13.2.jar" />
+            <classpath location="${librarydir}lib/hamcrest-core-1.3.jar" />
             <classpath location="${builddir}/classes/." />
             <classpath location="${builddir}/tests/." />
             <test name="root.beans.ResultBeanTest" />
@@ -68,8 +68,8 @@
     <target name="report" depends="build" >
         <mkdir dir="${reportdir}" />
         <junit haltonfailure="yes" haltonerror="yes">
-            <classpath location="lib/junit-4.13.2.jar" />
-            <classpath location="lib/hamcrest-core-1.3.jar" />
+            <classpath location="${librarydir}/junit-4.13.2.jar" />
+            <classpath location="${librarydir}/hamcrest-core-1.3.jar" />
             <classpath location="${builddir}/classes/." />
             <classpath location="${builddir}/tests/." />
             <formatter type="xml" />
