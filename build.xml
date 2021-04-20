@@ -6,7 +6,7 @@
     <property name = "reportdir" location="reports" />
     <property name = "testsClasses" value = "root.beans.AreaTestHittingBeanTest root.beans.ResultBeanTest" />
 
-    <target name="clean">
+    <target name="clean" >
         <delete dir="${builddir}"/>
     </target>
 
@@ -35,7 +35,7 @@
 <!--        <java classpath="lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar;${builddir}/classes/.;${builddir}/tests/." classname="org.junit.runner.JUnitCore" args="${testsClasses}" />-->
 <!--    </target>-->
 
-    <target name="test" depends="clean, compile">
+    <target name="test" depends="clean, build">
         <junit>
             <classpath location="lib/junit-4.13.2.jar" />
             <classpath location="lib/hamcrest-core-1.3.jar" />
@@ -63,8 +63,23 @@
     </target>
 
     <target name="report" depends="test" >
-
+        <mkdir dir="${reportdir}" />
+        <junit haltonfailure="yes" haltonerror="yes">
+            <classpath location="lib/junit-4.13.2.jar" />
+            <classpath location="lib/hamcrest-core-1.3.jar" />
+            <classpath location="${builddir}/classes/." />
+            <classpath location="${builddir}/tests/." />
+            <formatter type="xml" />
+            <test name="root.beans.ResultBeanTest" todir="${reportdir}" />
+            <test name="root.beans.AreaTestHittingBeanTest" todir="${reportdir}" />
+        </junit>
     </target>
+
+    <target name="clean.report" >
+        <delete dir="${reportdir}" />
+    </target>
+
+    <target name="clean.total" depends="clean, clean.native2ascii, clean.report" />
 
     <target name="team">
 
