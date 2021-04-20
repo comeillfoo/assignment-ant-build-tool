@@ -41,6 +41,10 @@
                       dest="${testdir}/root/beans/locals/ascii/russian" includes="**/*.properties" ext=".properties"/>
     </target>
 
+    <target name="clean.native2ascii">
+        <delete dir="${testdir}/root/beans/locals/ascii" />
+    </target>
+
     <target name="xml" >
         <xmlvalidate failonerror="no" lenient="yes" warn="yes">
             <fileset dir="${reportdir}" includes="*.xml"/>
@@ -48,7 +52,7 @@
     </target>
 
     <target name="report" depends="test" >
-        
+
     </target>
 
     <target name="team">
