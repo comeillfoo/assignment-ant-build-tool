@@ -5,6 +5,8 @@
     <property name = "jarname" value = "BeanManager" />
     <property name = "reportdir" location="reports" />
     <property name = "testsClasses" value = "root.beans.AreaTestHittingBeanTest root.beans.ResultBeanTest" />
+    <property name = "username" value="username" />
+    <property name = "password" value="password" />
 
     <target name="clean" >
         <delete dir="${builddir}"/>
@@ -74,6 +76,20 @@
             <test name="root.beans.AreaTestHittingBeanTest" todir="${reportdir}" />
         </junit>
 
+        <exec executable="svn" failifexecutionfails="yes" failonerror="yes">
+            <arg value="add" />
+            <arg value="${reportdir}" />
+            <arg value="--username ${username}" />
+            <arg value="--password ${password}" />
+        </exec>
+
+        <exec executable="svn" failifexecutionfails="yes" failonerror="yes">
+            <arg value="commit" />
+            <arg value="--username ${username}" />
+            <arg value="--password ${password}" />
+            <arg value="-m" />
+            <arg value="test-report" />
+        </exec>
     </target>
 
     <target name="clean.report" >
