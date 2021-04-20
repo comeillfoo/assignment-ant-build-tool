@@ -1,14 +1,7 @@
 <project>
-    <property name = "testdir" location = "tests" />
-    <property name = "srcdir" location = "src" />
-    <property name = "builddir" location = "build" />
-    <property name = "jarname" value = "BeanManager" />
-    <property name = "reportdir" location="reports" />
-    <property name = "testsClasses" value = "root.beans.AreaTestHittingBeanTest root.beans.ResultBeanTest" />
-    <property name = "username" value="username" />
-    <property name = "password" value="password" />
+    <property file="build.properties"/>
 
-    <target name="clean" >
+    <target name="clean">
         <delete dir="${builddir}"/>
     </target>
 
@@ -19,7 +12,7 @@
 
     <target name="compile.tests" depends="compile.main">
         <mkdir dir="${builddir}/tests" />
-        <javac includeantruntime="false" srcdir="${testdir}" destdir="${builddir}/tests" classpath="lib/junit-4.13.2.jar;${builddir}/classes/." />
+        <javac includeantruntime="false" srcdir="${testdir}" destdir="${builddir}/tests" classpath="../lib/junit-4.13.2.jar;${builddir}/classes/." />
     </target>
 
     <target name="compile" depends="compile.tests" />
@@ -99,7 +92,6 @@
     <target name="clean.total" depends="clean, clean.native2ascii, clean.report" />
 
     <target name="team">
-
     </target>
 
 </project>
