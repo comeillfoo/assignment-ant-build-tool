@@ -21,7 +21,15 @@
         <mkdir dir="${builddir}/artifacts"/>
         <jar destfile="${builddir}/artifacts/${jarname}.jar" basedir="${builddir}/classes">
             <manifest>
-                <attribute name="Main-Class" value="root.Main"/>
+                <attribute name="Created-By" value="${author}"/>
+                <attribute name="Name" value="${jar.name}"/>
+                <attribute name="Main-Class" value="${main.class.dir}"/>
+                <attribute name="Specification-Title" value="${specification.title}"/>
+                <attribute name="Specification-Version" value="${specification.version}"/>
+                <attribute name="Specification-Vendor" value="${specification.vendor}"/>
+                <attribute name="Implementation-Title" value="${implementation.title}"/>
+                <attribute name="Implementation-Version" value="${implementation.version} ${implementation.time}"/>
+                <attribute name="Implementation-Vendor" value="${implementation.vendor}"/>
             </manifest>
         </jar>
     </target>
