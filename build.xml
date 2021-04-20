@@ -31,8 +31,19 @@
         </jar>
     </target>
 
+<!--    <target name="test.console" depends="clean, compile">-->
+<!--        <java classpath="lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar;${builddir}/classes/.;${builddir}/tests/." classname="org.junit.runner.JUnitCore" args="${testsClasses}" />-->
+<!--    </target>-->
+
     <target name="test" depends="clean, compile">
-        <java classpath="lib/junit-4.13.2.jar;lib/hamcrest-core-1.3.jar;${builddir}/classes/.;${builddir}/tests/." classname="org.junit.runner.JUnitCore" args="${testsClasses}" />
+        <junit>
+            <classpath location="lib/junit-4.13.2.jar" />
+            <classpath location="lib/hamcrest-core-1.3.jar" />
+            <classpath location="${builddir}/classes/." />
+            <classpath location="${builddir}/tests/." />
+            <test name="root.beans.ResultBeanTest" />
+            <test name="root.beans.AreaTestHittingBeanTest" />
+        </junit>
     </target>
 
     <target name="native2ascii">
