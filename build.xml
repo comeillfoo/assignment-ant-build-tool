@@ -12,7 +12,7 @@
 
     <target name="compile.tests" depends="compile.main">
         <mkdir dir="${builddir}/tests" />
-        <javac includeantruntime="false" srcdir="${testdir}" destdir="${builddir}/tests" classpath="../lib/junit-4.13.2.jar;${builddir}/classes/." />
+        <javac includeantruntime="false" srcdir="${testdir}" destdir="${builddir}/tests" classpath="${librarydir}/junit-4.13.2.jar;${builddir}/classes/." />
     </target>
 
     <target name="compile" depends="compile.tests"/>
@@ -39,9 +39,9 @@
     <!--    </target>-->
 
     <target name="test" depends="build">
-        <junit>
+        <junit haltonfailure="yes" haltonerror="yes">
             <classpath location="${librarydir}/junit-4.13.2.jar" />
-            <classpath location="${librarydir}lib/hamcrest-core-1.3.jar" />
+            <classpath location="${librarydir}/hamcrest-core-1.3.jar" />
             <classpath location="${builddir}/classes/." />
             <classpath location="${builddir}/tests/." />
             <test name="root.beans.ResultBeanTest" />
